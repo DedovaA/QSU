@@ -9,12 +9,12 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class FromFileStrategy implements StrategyFill{
+public class FromFileStrategy implements DataSource {
 
     @Override
-    public List<Bus> getDataToList() throws CustomException {
+    public List<Bus> getBusList() throws CustomException {
         return  readFromFile().stream()
-                .map(Utility::mapStringToBus)
+                .map(Utility::mapStringToBusWithoutNullFields)
                 .collect(Collectors.toList());
     }
 

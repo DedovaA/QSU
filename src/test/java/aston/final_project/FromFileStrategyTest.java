@@ -21,10 +21,10 @@ public class FromFileStrategyTest {
     }
 
     @Test
-    public void shouldGetDataToList() throws CustomException {
+    public void shouldGetBusList() throws CustomException {
         String simulatedUserInput = "./src/main/resources/Buses";
         System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
-        List<Bus> list = fromFileStrategy.getDataToList();
+        List<Bus> list = fromFileStrategy.getBusList();
         list.forEach(System.out::println);
     }
 

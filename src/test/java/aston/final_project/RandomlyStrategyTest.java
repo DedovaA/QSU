@@ -15,10 +15,10 @@ public class RandomlyStrategyTest {
     }
 
     @Test
-    public void shouldGetDataToList() {
+    public void shouldGetBusList() {
         String simulatedUserInput = "5";
         System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
-        randomlyStrategy.getDataToList().forEach(System.out::println);
+        randomlyStrategy.getBusList().forEach(System.out::println);
     }
 
     @After

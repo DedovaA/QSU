@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class App {
 
     public static void main(String[] args) {
-            Strategy strategyKey = null;
+            Strategies strategyKey = null;
             boolean isActive = true;
             try(Scanner scanner = new Scanner(System.in)) {
                 while (isActive) {
@@ -13,8 +13,9 @@ public class App {
                         Выберите источник ввода данных для сортировки:
                         1 - из файла,
                         2 - вручную из консоли,
-                        3 - рандомный список.
-                        Для выхода нажмите - Q.""");
+                        3 - рандомный список,
+                        Q - для выхода,
+                        и нажмите Enter.""");
                     String userInput = scanner.nextLine();
                     if (userInput.equalsIgnoreCase("Q")) {
                         System.out.println("Выход из программы.");
@@ -22,15 +23,15 @@ public class App {
                     } else {
                         switch (userInput) {
                             case "1" -> {
-                                strategyKey = Strategy.FROM_FILE;
+                                strategyKey = Strategies.FROM_FILE;
                                 isActive = false;
                             }
                             case "2" -> {
-                                strategyKey = Strategy.MANUALLY;
+                                strategyKey = Strategies.MANUALLY;
                                 isActive = false;
                             }
                             case "3" -> {
-                                strategyKey = Strategy.RANDOMLY;
+                                strategyKey = Strategies.RANDOMLY;
                                 isActive = false;
                             }
                             default -> System.out.println("Неверный ввод, попробуйте еще раз.");
@@ -41,4 +42,3 @@ public class App {
             System.out.println(strategyKey);
         }
     }
-

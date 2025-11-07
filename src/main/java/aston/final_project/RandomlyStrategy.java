@@ -6,12 +6,12 @@ import java.util.Random;
 
 import static aston.final_project.Utility.getListSize;
 
-public class RandomlyStrategy implements StrategyFill{
+public class RandomlyStrategy implements DataSource {
     private static final Random random = new Random();
     private static final String[] MODELS = {"Volvo", "MAN", "Hyundai"};
 
     @Override
-    public List<Bus> getDataToList() throws CustomException{
+    public List<Bus> getBusList() throws CustomException{
         //return IntStream.range(0, getListSize()).mapToObj(i -> getRandomBus()).collect(Collectors.toList());
         List<Bus> list = new ArrayList<>();
         int size = getListSize();

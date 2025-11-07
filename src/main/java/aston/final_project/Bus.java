@@ -1,6 +1,11 @@
 package aston.final_project;
 
- public class Bus implements Comparable<Bus> {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+
+public class Bus implements Comparable<Bus> {
     private final String number;
     private final String model;
     private final int run;
@@ -25,15 +30,53 @@ package aston.final_project;
 
     @Override
     public int compareTo(Bus o) {
-        int compareNumber = this.number.compareTo(o.number);
-        if (compareNumber != 0) return compareNumber;
 
-        int compareModel = this.model.compareTo(o.model);
-        if (compareModel != 0) return compareModel;
+        if (this.number == null && o.number == null) {
+            return 0;
+        }
+        if (this.number == null) {
+            return -1;
+        }
+        if (o.number == null) {
+            return 1;
+        }
+        int i = this.number.compareTo(o.number);
+        if (i != 0) return i;
+
+        if (this.model == null && o.model == null) {
+            return 0;
+        }
+        if (this.model == null) {
+            return -1;
+        }
+        if (o.model == null) {
+            return 1;
+        }
+        int j = this.model.compareTo(o.model);
+        if (j != 0) return j;
 
         return Integer.compare(this.run, o.run);
     }
 
+//    /**
+//     * Метод может сравнивать объекты только с @NotNull полями
+//     * @return
+//     */
+//     @Override
+//     public int compareTo(Bus o) {
+//         int compareNumber = this.number.compareTo(o.number);
+//         if (compareNumber != 0) return compareNumber;
+//
+//         int compareModel = this.model.compareTo(o.model);
+//         if (compareModel != 0) return compareModel;
+//
+//         return Integer.compare(this.run, o.run);
+//     }
+
+    /**
+     * Метод может сравнивать объекты null-полями
+     * @return
+     */
     @Override
     public String toString() {
         return "Bus{" + "number='" + number + '\'' + ", model='" + model + '\'' + ", run=" + run + '}';
@@ -65,6 +108,16 @@ package aston.final_project;
             return new Bus(this);
         }
 
-    }
+        @Override
+        public boolean equals(Object o) {
+            if (o == null || getClass() != o.getClass()) return false;
+            BusBuilder that = (BusBuilder) o;
+            return run == that.run && Objects.equals(number, that.number) && Objects.equals(model, that.model);
+        }
 
+        @Override
+        public int hashCode() {
+            return Objects.hash(number, model, run);
+        }
+    }
 }

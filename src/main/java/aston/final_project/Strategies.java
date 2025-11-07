@@ -1,13 +1,13 @@
 package aston.final_project;
 
-public enum Strategy {
+enum Strategies {
     FROM_FILE("из файла"),
     MANUALLY("вручную"),
     RANDOMLY("рандомно");
 
     private final String title;
 
-    Strategy(String title) {
+    Strategies(String title) {
         this.title = title;
     }
 

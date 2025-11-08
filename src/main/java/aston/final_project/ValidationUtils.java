@@ -1,11 +1,8 @@
 package aston.final_project;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
-public class Utility {
+public class ValidationUtils {
 
     /**
      * Метод конвертирует строку в объект типа <Bus>
@@ -67,7 +64,7 @@ public class Utility {
      */
     static boolean isRunInstanceOfInteger (String run) {
          try {
-             Integer.parseInt(run);
+             Integer.parseInt(run.trim());
              return true;
          } catch (NumberFormatException e) {
              return false;
@@ -79,12 +76,12 @@ public class Utility {
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
                     Укажите размер коллекции (целое число > 0).
-                    "Для выхода введите пустую строку (и нажмите Enter).""");
+                    "Для выхода введите "Q" (и нажмите Enter).""");
         while(true) {
             input = scanner.nextLine().trim();
 
-            if(input.isEmpty()) {
-                System.out.print("Выход.\n");
+            if(input.equalsIgnoreCase("Q")) {
+                System.out.print("Пользователь прервал ввод.\n");
                 break;
             }
 
@@ -100,7 +97,7 @@ public class Utility {
                 System.out.println(input + " не является целым положительным числом.");
             }
         }
-        scanner.close();
+//        scanner.close();
         return 0;
     }
 

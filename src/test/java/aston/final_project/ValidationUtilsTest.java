@@ -5,11 +5,11 @@ import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 
-import static aston.final_project.Utility.getListSize;
-import static aston.final_project.Utility.mapStringToBus;
+import static aston.final_project.ValidationUtils.getListSize;
+import static aston.final_project.ValidationUtils.mapStringToBus;
 import static org.junit.Assert.assertThrows;
 
-public class UtilityTest {
+public class ValidationUtilsTest {
 
 
     @Test
@@ -21,19 +21,19 @@ public class UtilityTest {
 
     @Test
     public void invalidFieldCountMapStringToBus() {
-        Throwable throwable = assertThrows(CustomException.class, () -> Utility.mapStringToBus("MAN, X00ME, 98000,"));
+        Throwable throwable = assertThrows(CustomException.class, () -> ValidationUtils.mapStringToBus("MAN, X00ME, 98000,"));
         System.out.println(throwable.getMessage());
     }
 
     @Test
     public void invalidRunMapStringToBus() throws CustomException{
-        Throwable throwable = assertThrows(CustomException.class, () -> Utility.mapStringToBus("MAN, X00ME, opp"));
+        Throwable throwable = assertThrows(CustomException.class, () -> ValidationUtils.mapStringToBus("MAN, X00ME, opp"));
         System.out.println(throwable.getMessage());
     }
 
     @Test
     public void shouldNotMapStringToBus() {
-        Throwable throwable = assertThrows(CustomException.class, () -> Utility.mapStringToBus("MAN, X00ME, 98000,"));
+        Throwable throwable = assertThrows(CustomException.class, () -> ValidationUtils.mapStringToBus("MAN, X00ME, 98000,"));
         System.out.println(throwable.getMessage());
     }
 

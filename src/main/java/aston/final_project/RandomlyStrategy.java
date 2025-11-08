@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static aston.final_project.Utility.getListSize;
+import static aston.final_project.ValidationUtils.getListSize;
 
 public class RandomlyStrategy implements DataSource {
     private static final Random random = new Random();
@@ -23,7 +23,7 @@ public class RandomlyStrategy implements DataSource {
     }
 
     private static Bus getRandomBus() {
-        String number = String.valueOf(random.nextInt(1000) + 1000);
+        String number = String.valueOf(random.nextInt(100) + 100);
         String model = MODELS[random.nextInt(MODELS.length)];
         int run = (random.nextInt(100) + 100) * 1000;
         return new Bus.BusBuilder().setNumber(number).setModel(model).setRun(run).build();

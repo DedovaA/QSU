@@ -14,7 +14,7 @@ public class FromFileStrategy implements DataSource {
     @Override
     public List<Bus> getBusList() throws CustomException {
         return  readFromFile().stream()
-                .map(Utility::mapStringToBusWithoutNullFields)
+                .map(ValidationUtils::mapStringToBusWithoutNullFields)
                 .collect(Collectors.toList());
     }
 
@@ -34,10 +34,9 @@ public class FromFileStrategy implements DataSource {
 
     private static String getPath(){
         String userInput;
-        try (Scanner scanner = new Scanner(System.in)) {
+        Scanner scanner = new Scanner(System.in);
             System.out.println("Укажите путь к файлу.");
             userInput = scanner.nextLine();
-        }
         return userInput;
     }
 

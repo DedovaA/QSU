@@ -32,7 +32,7 @@ public class FromFileStrategy implements DataSource {
         if(path == null)
             return null;
 
-        List<String> list = new ArrayList<>();
+        List<String> list;
         try (Stream<String> strings = Files.lines(path, StandardCharsets.UTF_8)) {
             list = strings.toList();
         } catch (IOException e) {

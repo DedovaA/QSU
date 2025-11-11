@@ -34,7 +34,7 @@ public class App {
     }
 
     private static void printResult(List<Bus> list) {
-        System.out.println("Unsorted list:");
+        System.out.println("\nUnsorted list:");
         list.forEach(System.out::println);
         System.out.println("Sorted list:");
         SortUtils.quickSort(list);

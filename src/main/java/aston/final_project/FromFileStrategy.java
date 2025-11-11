@@ -18,10 +18,8 @@ public class FromFileStrategy implements DataSource {
     public List<Bus> getBusList() throws CustomException {
         List<Bus> listBus = new ArrayList<>();
         List<String> listStrings = readFromFile();
-
         if(listStrings == null)
             return listBus;
-
         Bus bus;
         for (int i = 0; i < listStrings.size(); i++) {
             bus = ValidationUtils.mapStringToBus(listStrings.get(i));
@@ -41,13 +39,13 @@ public class FromFileStrategy implements DataSource {
 
         try (Stream<String> strings = Files.lines(path, StandardCharsets.UTF_8)) {
             list = strings.toList();
-
         } catch (IOException e) {
-            System.out.println("Ошибка чтения файла, попробуйте еще раз.");
+            System.out.println("Ошибка чтения файла, попробуйте еще раз.\n");
             return null;
         }
+
         if (list.isEmpty()) {
-            System.out.println("Файл не может быть пустым, попробуйте еще раз.");
+            System.out.println("Файл не может быть пустым, попробуйте еще раз.\n");
             return null;
         }
         return list;
@@ -77,6 +75,7 @@ public class FromFileStrategy implements DataSource {
                 System.out.println("Путь не существует или не является файлом, попробуйте еще раз. Или нажмите Q для выхода.");
             }
         }
+//        scanner.close();
         return path;
     }
 

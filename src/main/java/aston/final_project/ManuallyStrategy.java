@@ -29,25 +29,24 @@ public class ManuallyStrategy implements DataSource {
             return list;
         String userInput;
         Scanner scanner = new Scanner(System.in);
-            System.out.printf("""
-                        Введите параметры автобуса в формате: номер, модель, пробег.
-                        Пример ввода: `X00ME, MAN, 98000.
-                        Для выхода введите "Q" (и нажмите Enter).\n""", size);
+            System.out.println("Введите параметры автобуса в формате: номер, модель, пробег. Для выхода введите \"Q\" (и нажмите Enter).");
             for (int i = 0; i < size; i++) {
-                System.out.printf("Введите параметры %d автобуса:\n", i + 1);
-                userInput = scanner.nextLine();
-                if(userInput.equalsIgnoreCase("Q"))
-                    return list;
-                if(userInput.isBlank()){
-                    System.out.println("Вы ничего не ввели, попробуйте еще раз.");
-                    i--;
-                    continue;
-                } else if(!ValidationUtils.isUserInputConsistOfThreeFields(userInput)) {
-                    System.out.println("У объекта должно быть 3 поля, попробуйте еще раз.");
-                    i--;
-                    continue;
+                System.out.printf("\nВведите параметры %d автобуса:\n", i + 1);
+                while (true) {
+                    userInput = scanner.nextLine();
+                    if(userInput.equalsIgnoreCase("Q"))
+                        return list;
+                    if(userInput.isBlank()){
+                        System.out.println("Вы ничего не ввели, попробуйте еще раз. Или нажмите Q для выхода.");
+                        continue;
+                    }
+                    if(!ValidationUtils.isUserInputConsistOfThreeFields(userInput)) {
+                        System.out.println("У объекта должно быть 3 поля, попробуйте еще раз. Или нажмите Q для выхода.");
+                        continue;
+                    }
+                    list.add(userInput);
+                    break;
                 }
-                list.add(userInput);
             }
 //        scanner.close();
         return list;

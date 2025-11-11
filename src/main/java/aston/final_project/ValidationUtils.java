@@ -5,13 +5,13 @@ import java.util.Scanner;
 public class ValidationUtils {
     /**
      * Метод конвертирует строку в объект типа <Bus>
-     * @param string строка в формате "field1, field2, field3"
+     * @param userInput строка в формате "field1, field2, field3"
      * @return объект типа Bus с полями содержащими null: field1, field2, field3;
      */
-    static Bus mapStringToBus(String string) {
-        Bus bus = null;
-        if(isUserInputConsistOfThreeFields(string)) {
-            String[] parts = string.split(",", -1);
+    static Bus mapStringToBus(String userInput) {
+        Bus bus;
+        if(isUserInputConsistOfThreeFields(userInput)) {
+            String[] parts = userInput.split(",", -1);
             String[] fields = new String[]{null, null, "0"};
             for (int i = 0; i < parts.length; i++) {
                 fields[i] = parts[i].isBlank()? fields[i] : parts[i].trim();
@@ -33,6 +33,25 @@ public class ValidationUtils {
         return bus;
     }
 
+    static boolean isUserInputValidRun(String input) {
+        String[] fields = input.split(",", -1);
+        String runField = fields[2].trim();
+        if(runField.isEmpty())
+            return true;
+        int run;
+        try {
+            run = Integer.parseInt(runField);
+            if(run < 0) {
+                System.out.println("Пробег должен быть > 0. Попробуйте еще раз.\n");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Пробег должен быть числом. Попробуйте еще раз.\n");
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Метод проверяет пользовательский ввод на возможность конвертации в объект типа Bus.
      * @param input - исходная строка для конвертации в объект типа <Bus>
@@ -46,26 +65,24 @@ public class ValidationUtils {
         return commaCount == 2;
     }
 
-    /**
-     * Метод проверяет возможность парсинга строки в число (задан ли пробег числом)
-     * @param run
-     * @return true, если можно спарсить чтроку в число
-     */
-    static boolean isRunInstanceOfInteger (String run) {
-         try {
-             Integer.parseInt(run.trim());
-             return true;
-         } catch (NumberFormatException e) {
-             return false;
-         }
-    }
+//    /**?????????????????????????????
+//     * Метод проверяет возможность парсинга строки в число (задан ли пробег числом)
+//     * @param run
+//     * @return true, если можно спарсить чтроку в число
+//     */
+//    static boolean isRunInstanceOfInteger (String run) {
+//         try {
+//             Integer.parseInt(run.trim());
+//             return true;
+//         } catch (NumberFormatException e) {
+//             return false;
+//         }
+//    }
 
     static int getListSize() {
         String input;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("""
-                    Укажите размер коллекции (целое число > 0).
-                    "Для выхода введите "Q" (и нажмите Enter).""");
+        System.out.println("Укажите размер коллекции (целое число > 0). Или нажмите Q для выхода.");
         while(true) {
             input = scanner.nextLine().trim();
             if(input.equalsIgnoreCase("Q")) {
@@ -81,7 +98,7 @@ public class ValidationUtils {
                     System.out.println("Число должно быть > 0, попробуйте еще.");
                 }
             } catch (NumberFormatException e) {
-                System.out.println(input + " не является целым положительным числом.");
+                System.out.println("Ввод должен быть числом.");
             }
         }
 //        scanner.close();

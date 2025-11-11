@@ -59,8 +59,11 @@ public class FromFileStrategy implements DataSource {
         while (true) {
             try {
                 input =  scanner.nextLine();
-                if(input.equalsIgnoreCase("Q"))
-                    break;
+                if(input.equalsIgnoreCase("Q")) {
+                    System.out.println("Возврат в главное меню.\n");
+                    return null;
+                }
+
                 if(input.isBlank()) {
                     System.out.println("Имя файла не может быть пустым, попробуйте еще раз. Или нажмите Q для выхода.");
                     continue;

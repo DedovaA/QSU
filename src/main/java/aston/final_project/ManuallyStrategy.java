@@ -29,7 +29,7 @@ public class ManuallyStrategy implements DataSource {
             return list;
         String userInput;
         Scanner scanner = new Scanner(System.in);
-            System.out.println("Введите параметры автобуса в формате: номер, модель, пробег. Для выхода введите \"Q\" (и нажмите Enter).");
+            System.out.println("Введите параметры автобусов в формате: номер, модель, пробег. Для выхода введите \"Q\" (и нажмите Enter).");
             for (int i = 0; i < size; i++) {
                 System.out.printf("\nВведите параметры %d автобуса:\n", i + 1);
                 while (true) {
@@ -42,6 +42,9 @@ public class ManuallyStrategy implements DataSource {
                     }
                     if(!ValidationUtils.isUserInputConsistOfThreeFields(userInput)) {
                         System.out.println("У объекта должно быть 3 поля, попробуйте еще раз. Или нажмите Q для выхода.");
+                        continue;
+                    }
+                    if(!ValidationUtils.isUserInputValidRun(userInput)) {
                         continue;
                     }
                     list.add(userInput);

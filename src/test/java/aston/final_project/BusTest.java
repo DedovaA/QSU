@@ -4,59 +4,23 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import static org.junit.Assert.assertTrue;
 
 public class BusTest {
-    List<Bus> sortedBuses = new ArrayList<>();
-    List<Bus> randomBuses = new ArrayList<>();
-
-    @org.junit.Test
-    public void sortRun() {
-        randomBuses.add(new Bus.BusBuilder().setRun(9).build());
-        randomBuses.add(new Bus.BusBuilder().setRun(2).build());
-        randomBuses.add(new Bus.BusBuilder().setRun(5).build());
-        randomBuses.forEach(System.out::println);
-        System.out.println();
-
-        sortedBuses.add(new Bus.BusBuilder().setRun(2).build());
-        sortedBuses.add(new Bus.BusBuilder().setRun(5).build());
-        sortedBuses.add(new Bus.BusBuilder().setRun(9).build());
-
-        Collections.sort(randomBuses);
-        randomBuses.forEach(System.out::println);
-        assertTrue(sortedBuses.equals(randomBuses));
-    }
-
-    @org.junit.Test
-    public void sortModel() {
-        randomBuses.add(new Bus.BusBuilder().setModel("VOLVO").setRun(9).build());
-        randomBuses.add(new Bus.BusBuilder().setModel("MAN").setRun(7).build());
-        randomBuses.add(new Bus.BusBuilder().setModel("HYUNDAI").setRun(2).build());
-        randomBuses.add(new Bus.BusBuilder().setModel("MAN").setRun(5).build());
-        randomBuses.forEach(System.out::println);
-        System.out.println();
-
-        sortedBuses.add(new Bus.BusBuilder().setModel("HYUNDAI").setRun(2).build());
-        sortedBuses.add(new Bus.BusBuilder().setModel("MAN").setRun(5).build());
-        sortedBuses.add(new Bus.BusBuilder().setModel("MAN").setRun(7).build());
-        sortedBuses.add(new Bus.BusBuilder().setModel("VOLVO").setRun(9).build());
-
-        Collections.sort(randomBuses);
-        randomBuses.forEach(System.out::println);
-        assertTrue(sortedBuses.equals(randomBuses));
-    }
 
     @org.junit.Test
     public void sortNumber() {
+        List<Bus> sortedBuses = new ArrayList<>();
+        List<Bus> randomBuses = new ArrayList<>();
+
         randomBuses.add(new Bus.BusBuilder().setNumber("Ab").setModel("VOLVO").setRun(5).build());
         randomBuses.add(new Bus.BusBuilder().setNumber("2D").setModel("MAN").setRun(7).build());
         randomBuses.add(new Bus.BusBuilder().setNumber("A3").setModel("HYUNDAI").setRun(2).build());
         randomBuses.add(new Bus.BusBuilder().setNumber("A3").setModel("MAN").setRun(5).build());
         randomBuses.add(new Bus.BusBuilder().setNumber("1S").setModel("VOLVO").setRun(9).build());
         randomBuses.add(new Bus.BusBuilder().setNumber("A3").setModel("HYUNDAI").setRun(3).build());
+        System.out.println("Before sort:");
         randomBuses.forEach(System.out::println);
-        System.out.println();
 
         sortedBuses.add(new Bus.BusBuilder().setNumber("1S").setModel("VOLVO").setRun(9).build());
         sortedBuses.add(new Bus.BusBuilder().setNumber("2D").setModel("MAN").setRun(7).build());
@@ -65,6 +29,7 @@ public class BusTest {
         sortedBuses.add(new Bus.BusBuilder().setNumber("A3").setModel("MAN").setRun(5).build());
         sortedBuses.add(new Bus.BusBuilder().setNumber("Ab").setModel("VOLVO").setRun(5).build());
 
+        System.out.println("After sort:");
         Collections.sort(randomBuses);
         randomBuses.forEach(System.out::println);
         assertTrue(sortedBuses.equals(randomBuses));

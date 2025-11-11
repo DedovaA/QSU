@@ -1,6 +1,7 @@
 package aston.final_project;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import java.io.ByteArrayInputStream;
@@ -18,7 +19,7 @@ public class RandomlyStrategyTest {
     public void shouldGetBusList() {
         String simulatedUserInput = "5";
         System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
-        randomlyStrategy.getBusList().forEach(System.out::println);
+        Assert.assertEquals(5, randomlyStrategy.getBusList().size());
     }
 
     @After

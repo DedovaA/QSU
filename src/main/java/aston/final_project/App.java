@@ -19,15 +19,14 @@ public class App {
                     System.out.println("Выход из программы.");
                     return;
                 }
-
-                if (!strategyMap.containsKey(input)) {
-                    System.out.println("Неверный ввод, попробуйте еще раз.");
-                    continue;
-                }
-                list = strategyMap.get(input).getBusList();
-                if (list != null && !list.isEmpty()) {
-                    printResult(list);
-                    break;
+                if (strategyMap.containsKey(input)) {
+                    list = strategyMap.get(input).getBusList();
+                    if (list != null && !list.isEmpty()) {
+                        printResult(list);
+                        break;
+                    }
+                } else {
+                    System.out.println("Неверный ввод, попробуйте еще раз.\n");
                 }
             }
         }

@@ -29,18 +29,28 @@ public class ValidationUtils {
      * @return объект типа Bus с полями содержащими null: field1, field2, field3;
      */
     static Bus mapStringToBus(String string) throws CustomException{
+        Bus bus = null;
         if(isUserInputConsistOfThreeFields(string)) {
             String[] parts = string.split(",", -1);
             String[] fields = new String[]{null, null, "0"};
             for (int i = 0; i < parts.length; i++) {
                 fields[i] = parts[i].isBlank()? fields[i] : parts[i].trim();
             }
-            return new Bus.BusBuilder()
-                    .setNumber(fields[0])
-                    .setModel(fields[1])
-                    .setRun(Integer.parseInt(fields[2]))
-                    .build();
-        } else throw new CustomException("Ошибка конвертации (у объекта Bus должно быть 3 поля).");
+            try {
+                bus = new Bus.BusBuilder()
+                        .setNumber(fields[0])
+                        .setModel(fields[1])
+                        .setRun(Integer.parseInt(fields[2]))
+                        .build();
+            } catch (RuntimeException e) {
+                System.out.println("Ошибка конвертации данных (пробег должен быть числом). Попробуйте еще раз.");
+                return null;
+            }
+        } else {
+            System.out.println("Ошибка конвертации (у объекта Bus должно быть 3 поля).");
+            return null;
+        }
+        return bus;
     }
 
 

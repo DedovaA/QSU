@@ -5,26 +5,7 @@ import java.util.*;
 public class App {
     private static final DataSource[] strategyArr = {new FromFileStrategy(),new ManuallyStrategy(),new RandomlyStrategy()};
 
-//    static Map<String, DataSource> getMap(DataSource[] arr) {
-//        Map<String, DataSource> map = new HashMap<>();
-//        for (int i = 0; i < strategyArr.length; i++) {
-//            map.put(String.valueOf(i + 1), arr[i]);
-//        }
-//        return map;
-//    }
-
-//    static String createMainMenu(DataSource[] arr) {
-//        StringBuilder message = new StringBuilder("Выберите источник ввода данных для сортировки:\n");
-//        for (int i = 0; i < strategyArr.length; i++) {
-//            message.append((i + 1)).append(" - ").append(arr[i].toString()).append("\n");
-//        }
-//        message.append("Q - для выхода");
-//        return message.toString();
-//    }
-
     public static void main(String[] args) {
-//        Map<String, DataSource> strategyMap = getMap(strategyArr);
-//        String mainMenuMessage = createMainMenu(strategyArr);
         Map<String, DataSource> strategyMap = new StrategyMap(strategyArr).getMap();
         String mainMenuMessage = new MainMenu(strategyArr).getMenu();
         List<Bus> list;

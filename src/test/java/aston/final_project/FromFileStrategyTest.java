@@ -22,7 +22,7 @@ public class FromFileStrategyTest {
 
     @Test
     public void shouldGetBusList() throws CustomException {
-        String simulatedUserInput = "./src/main/resources/Buses";
+        String simulatedUserInput = "./src/main/resources/list";
         System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
         List<Bus> list = fromFileStrategy.getBusList();
         list.forEach(System.out::println);

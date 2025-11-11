@@ -3,15 +3,23 @@ package aston.final_project;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-
 
 public class ManuallyStrategy implements DataSource {
     @Override
     public List<Bus> getBusList() throws CustomException{
-        return manuallyInput().stream()
-                .map(ValidationUtils::mapStringToBusWithoutNullFields)
-                .collect(Collectors.toList());
+        List<Bus> listBus = new ArrayList<>();
+        List<String> listStrings = manuallyInput();
+        if(listStrings == null)
+            return listBus;
+        Bus bus;
+        for (int i = 0; i < listStrings.size(); i++) {
+            bus = ValidationUtils.mapStringToBus(listStrings.get(i));
+            if(bus != null)
+                listBus.add(bus);
+            else
+                return null;
+        }
+        return listBus;
     }
 
     private static List<String> manuallyInput() {
@@ -26,6 +34,7 @@ public class ManuallyStrategy implements DataSource {
                         Пример ввода: `X00ME, MAN, 98000.
                         Для выхода введите "Q" (и нажмите Enter).\n""", size);
             for (int i = 0; i < size; i++) {
+                System.out.printf("Введите параметры %d автобуса:\n", i + 1);
                 userInput = scanner.nextLine();
                 if(userInput.equalsIgnoreCase("Q"))
                     return list;
@@ -34,7 +43,7 @@ public class ManuallyStrategy implements DataSource {
                     i--;
                     continue;
                 } else if(!ValidationUtils.isUserInputConsistOfThreeFields(userInput)) {
-                    System.out.println("Не достаточно полей, попробуйте еще раз.");
+                    System.out.println("У объекта должно быть 3 поля, попробуйте еще раз.");
                     i--;
                     continue;
                 }
@@ -49,29 +58,3 @@ public class ManuallyStrategy implements DataSource {
         return "Консольный ввод (Manually)";
     }
 }
-
-
-//private static List<String> manuallyInput() {
-////        int size = ValidationUtils.getListSize();
-//    int size = 3;
-//    List<String> list = new ArrayList<>();
-//    System.out.println("Введите параметры " + size + " автобусов в формате: номер, модель, пробег.\n" +
-//            "Пример ввода: `MAN, X00ME, 98000.\n" +
-//            "Для выхода введите пустую строку (и нажмите Enter).");
-//    String userInput;
-//    try (Scanner scanner = new Scanner(System.in)) {
-//        for (int i = 0; i < size; i++) {
-//            if (!scanner.hasNextLine()) {
-//                System.out.println("Вы ничего не ввели, попробуйте еще раз.");
-//                continue;
-//            }
-//            userInput = scanner.nextLine();
-//            if(userInput.isBlank()){
-//                System.out.println("Ввод завершен.");
-//                break;
-//            }
-//            list.add(userInput);
-//        }
-//    }
-//    return list;
-//}

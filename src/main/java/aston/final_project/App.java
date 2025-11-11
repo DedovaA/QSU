@@ -1,46 +1,49 @@
 package aston.final_project;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class App {
+    private static final DataSource[] strategyArr = {new FromFileStrategy(),new ManuallyStrategy(),new RandomlyStrategy()};
+
+//    static Map<String, DataSource> getMap(DataSource[] arr) {
+//        Map<String, DataSource> map = new HashMap<>();
+//        for (int i = 0; i < strategyArr.length; i++) {
+//            map.put(String.valueOf(i + 1), arr[i]);
+//        }
+//        return map;
+//    }
+
+//    static String createMainMenu(DataSource[] arr) {
+//        StringBuilder message = new StringBuilder("Выберите источник ввода данных для сортировки:\n");
+//        for (int i = 0; i < strategyArr.length; i++) {
+//            message.append((i + 1)).append(" - ").append(arr[i].toString()).append("\n");
+//        }
+//        message.append("Q - для выхода");
+//        return message.toString();
+//    }
 
     public static void main(String[] args) {
-        Map<Enum, DataSource> strategies = new HashMap<>();
-        strategies.put(Strategies.FROM_FILE, new FromFileStrategy());
-        strategies.put(Strategies.MANUALLY, new ManuallyStrategy());
-        strategies.put(Strategies.RANDOMLY, new RandomlyStrategy());
-
+//        Map<String, DataSource> strategyMap = getMap(strategyArr);
+//        String mainMenuMessage = createMainMenu(strategyArr);
+        Map<String, DataSource> strategyMap = new StrategyMap(strategyArr).getMap();
+        String mainMenuMessage = new MainMenu(strategyArr).getMenu();
         List<Bus> list;
 
         try (Scanner scanner = new Scanner(System.in)) {
             String input;
             while (true) {
-                System.out.println("""
-                        Выберите источник ввода данных для сортировки:
-                        1 - из файла,
-                        2 - вручную из консоли,
-                        3 - рандомный список,
-                        Q - для выхода,
-                        и нажмите Enter.""");
-                input = scanner.nextLine();
+                System.out.println(mainMenuMessage);
+                input = scanner.nextLine().trim();
                 if (input.equalsIgnoreCase("Q")) {
                     System.out.println("Выход из программы.");
                     return;
                 }
-                Enum key = switch (input.trim()) {
-                    case "1" -> Strategies.FROM_FILE;
-                    case "2" -> Strategies.MANUALLY;
-                    case "3" -> Strategies.RANDOMLY;
-                    default -> null;
-                };
-                if (key == null) {
+
+                if (!strategyMap.containsKey(input)) {
                     System.out.println("Неверный ввод, попробуйте еще раз.");
                     continue;
                 }
-                list = strategies.get(key).getBusList();
+                list = strategyMap.get(input).getBusList();
                 if (list != null && !list.isEmpty()) {
                     printResult(list);
                     break;

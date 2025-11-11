@@ -43,6 +43,11 @@ public class ManuallyStrategy implements DataSource {
 //        scanner.close();
         return list;
     }
+
+    @Override
+    public String toString() {
+        return "Консольный ввод (Manually)";
+    }
 }
 
 

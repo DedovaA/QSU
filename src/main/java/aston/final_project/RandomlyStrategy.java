@@ -29,4 +29,8 @@ public class RandomlyStrategy implements DataSource {
         return new Bus.BusBuilder().setNumber(number).setModel(model).setRun(run).build();
     }
 
+    @Override
+    public String toString() {
+        return "Рандомная генерация (Randomly)";
+    }
 }
